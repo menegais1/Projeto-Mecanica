@@ -115,7 +115,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Cliente</span></a></li>
                 <li><a href="#"><i class="fa fa-link"></i> <span>Veiculo</span></a></li>
                 <li><a href="#"><i class="fa fa-link"></i> <span>Ordem de Serviço</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>Usuários</span></a></li>
+                <li><a href="#"><i class="fa fa-link"></i> <span>Contatos</span></a></li>
 
                 <!-- <li class="treeview">
                      <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
@@ -158,9 +158,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                         <div class="col-md-6">
 
-                            <button data-toggle="modal" data-target="#modalNovo"
-                                    class="btn btn-success btn-block btn-novo">Nova Ordem
-                                de Serviço
+                            <button data-toggle="modal" data-target="#modalNovo" class="btn btn-success btn-block btn-novo">Novo Contato
                             </button>
 
                         </div>
@@ -182,25 +180,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     Cliente
                                 </th>
                                 <th>
-                                    Veículo
+                                    Nome
                                 </th>
                                 <th>
-                                    Usuário
+                                    Email
                                 </th>
                                 <th>
-                                    Data de Início
-                                </th>
-                                <th>
-                                    Data de Término
-                                </th>
-                                <th>
-                                    Descrição do Serviço
-                                </th>
-                                <th>
-                                    Valor
-                                </th>
-                                <th>
-                                    Notas
+                                    Telefone
                                 </th>
                                 <th>
                                     Funções
@@ -213,9 +199,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     12
                                 </td>
                                 <td>
-                                    aaaaa
-                                </td>
-                                <td>
                                     Roberto Menegais
                                 </td>
                                 <td>
@@ -225,23 +208,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     Ford
                                 </td>
                                 <td>
-                                    a
+                                    2007
                                 </td>
+
                                 <td>
-                                    b
-                                </td>
-                                <td>
-                                    c
-                                </td>
-                                <td>
-                                    d
-                                </td>
-                                <td>
-                                    <button data-toggle="modal" data-target="#modalEditar"
-                                            class="btn btn-sm btn-primary">Editar
+                                    <button data-toggle="modal" data-target="#modalEditar" class="btn btn-sm btn-primary">Editar
                                     </button>
-                                    <button data-toggle="modal" data-target="#modalExcluir"
-                                            class="btn btn-sm btn-warning">Excluir
+                                    <button data-toggle="modal" data-target="#modalExcluir" class="btn btn-sm btn-warning">Excluir
                                     </button>
                                 </td>
 
@@ -283,7 +256,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Cadastrar Nova Ordem de Serviço</h4>
+                                    <h4 class="modal-title">Cadastrar novo Contato</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
@@ -291,74 +264,36 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <form class="form-group">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label class="control-label"
-                                                               for="client_id_novo">Cliente</label>
-                                                        <select class="form-control" name="client_id_novo"
-                                                                id="client_id_novo">
+                                                        <label class="control-label" for="client_id_novo">Cliente</label>
+                                                        <select class="form-control" name="client_id_novo" id="client_id_novo">
                                                             <option value="0">Placeholder</option>
                                                         </select>
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label class="control-label"
-                                                               for="vehicle_id_novo">Veículo</label>
-                                                        <select class="form-control" name="vehicle_id_novo"
-                                                                id="vehicle_id_novo">
-                                                            <option value="0">Placeholder</option>
-                                                        </select>
+                                                        <label class="control-label" for="name_novo">Nome</label>
+                                                        <input type="text" class="form-control" name="name_novo" id="name_novo"
+                                                               placeholder="Insira o Nome">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label class="control-label" for="user_id_novo">Usuário</label>
-                                                        <select class="form-control" name="user_id_novo"
-                                                                id="user_id_novo">
-                                                            <option value="0">Placeholder</option>
-                                                        </select>
+                                                        <label class="control-label" for="email_novo">Email</label>
+                                                        <input type="text" class="form-control" name="email_novo"
+                                                               id="email_novo"
+                                                               placeholder="Insira o Email">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label class="control-label" for="start_date_novo">Data de
-                                                            Início</label>
-                                                        <input type="text" class="form-control" name="start_date_novo"
-                                                               id="start_date_novo"
-                                                               placeholder="Insira a Data de Início">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="end_date_novo">Data de
-                                                            Término</label>
-                                                        <input type="text" class="form-control" name="end_date_novo"
-                                                               id="end_date_novo">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="service_description_novo">Descrição
-                                                            do
-                                                            Serviço</label>
-                                                        <input type="text" class="form-control"
-                                                               name="service_description_novo"
-                                                               id="service_description_novo"
-                                                               placeholder="Insira a Descrição do Serviço">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="amount_novo">Valor</label>
-                                                        <input type="text" class="form-control" name="amount_novo"
-                                                               id="amount_novo"
-                                                               placeholder="Insira o Valor">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="notes_novo">Notas</label>
-                                                        <input type="text" class="form-control" name="notes_novo"
-                                                               id="notes_novo"
-                                                               placeholder="Insira as Notas">
+                                                        <label class="control-label" for="phone_novo">Telefone</label>
+                                                        <input type="text" class="form-control" name="phone_novo"
+                                                               id="phone_novo"
+                                                               placeholder="Insira o Telefone">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6 col-md-offset-3">
                                                         <input type="submit"
                                                                class="btn btn-success btn-block form-control cadastro"
-                                                               value="Criar Nova Ordem de Serviço">
+                                                               value="Criar Novo Contato">
                                                     </div>
                                                 </div>
                                             </form>
@@ -381,76 +316,44 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Editar Ordem de Serviço</h4>
+                                    <h4 class="modal-title">Editar Contato</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="cadastro-form">
                                             <form class="form-group">
+
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label class="control-label"
-                                                               for="client_id_editar">Cliente</label>
-                                                        <select class="form-control" name="client_id_editar"
-                                                                id="client_id_editar">
-                                                            <option value="0">Placeholder</option>
-                                                        </select>
+                                                        <label class="control-label" for="id_editar">Id</label>
+                                                        <input type="text" class="form-control" name="id_editar" id="id_editar">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label class="control-label"
-                                                               for="vehicle_id_editar">Veículo</label>
-                                                        <select class="form-control" name="vehicle_id_editar"
-                                                                id="vehicle_id_editar">
+                                                        <label class="control-label" for="client_id_editar">Cliente</label>
+                                                        <select class="form-control" name="client_id_editar" id="client_id_editar">
                                                             <option value="0">Placeholder</option>
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label class="control-label"
-                                                               for="user_id_editar">Usuário</label>
-                                                        <select class="form-control" name="user_id_editar"
-                                                                id="user_id_editar">
-                                                            <option value="0">Placeholder</option>
-                                                        </select>
+                                                        <label class="control-label" for="name_editar">Nome</label>
+                                                        <input type="text" class="form-control" name="name_editar" id="name_editar"
+                                                               placeholder="Insira o Nome">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label class="control-label" for="start_date_editar">Data de
-                                                            Início</label>
-                                                        <input type="text" class="form-control" name="start_date_editar"
-                                                               id="start_date_editar"
-                                                               placeholder="Insira a Data de Início">
+                                                        <label class="control-label" for="email_editar">Email</label>
+                                                        <input type="text" class="form-control" name="email_editar"
+                                                               id="email_editar"
+                                                               placeholder="Insira o Email">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label class="control-label" for="end_date_editar">Data de
-                                                            Término</label>
-                                                        <input type="text" class="form-control" name="end_date_editar"
-                                                               id="end_date_editar">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="service_description_editar">Descrição
-                                                            do
-                                                            Serviço</label>
-                                                        <input type="text" class="form-control"
-                                                               name="service_description_editar"
-                                                               id="service_description_editar"
-                                                               placeholder="Insira a Descrição do Serviço">
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="amount_editar">Valor</label>
-                                                        <input type="text" class="form-control" name="amount_editar"
-                                                               id="amount_editar"
-                                                               placeholder="Insira o Valor">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="notes_editar">Notas</label>
-                                                        <input type="text" class="form-control" name="notes_editar"
-                                                               id="notes_editar"
-                                                               placeholder="Insira as Notas">
+                                                        <label class="control-label" for="phone_editar">Telefone</label>
+                                                        <input type="text" class="form-control" name="phone_editar"
+                                                               id="phone_editar"
+                                                               placeholder="Insira o Telefone">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -480,16 +383,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Excluir Ordem de Serviço</h4>
+                                    <h4 class="modal-title">Excluir Contato</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-3 col-md-offset-3">
-                                            <buttton class="btn btn-success btn-block">Confirmar</buttton>
+                                            <button class="btn btn-success btn-block">Confirmar</button>
                                         </div>
                                         <div class="col-md-3">
-                                            <buttton class="btn btn-danger btn-block" data-dismiss="modal">Cancelar
-                                            </buttton>
+                                            <button class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
                                         </div>
                                     </div>
                                 </div>

@@ -1,17 +1,10 @@
 <div class="row data">
     <div class="row">
-        <div class="col-md-1">
-            <label class="control-label" for="numberPage">Number Per Page</label>
+        <div class="col-md-6">
+            <button data-toggle="modal" data-target="#modalNovo" class="btn btn-success btn-block btn-novo">Novo Cliente
+            </button>
         </div>
-        <div class="col-md-3">
-            <select name="numberPage" id="numberPage" class="form-control input-lg">
-                <option value="5">5</option>
-                <option value="10">10</option>
-                <option value="15">15</option>
-                <option value="20">20</option>
-            </select>
-        </div>
-        <div class="col-md-6 col-md-offset-2">
+        <div class="col-md-6 ">
             <input class="form-control input-lg" id="search" type="text" placeholder="Procurar..."
                    name="search">
 
@@ -34,6 +27,10 @@
                 <th>
                     Status
                 </th>
+
+                <th>
+                    Funções
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -45,10 +42,17 @@
                     Roberto Menegais
                 </td>
                 <td>
-                    11111111111
+                    ypk-8228
                 </td>
                 <td>
-                    Em andamento
+                    2007
+                </td>
+
+                <td>
+                    <button data-toggle="modal" data-target="#modalEditar" class="btn btn-sm btn-primary">Editar
+                    </button>
+                    <button data-toggle="modal" data-target="#modalExcluir" class="btn btn-sm btn-warning">Excluir
+                    </button>
                 </td>
 
             </tr>
@@ -58,7 +62,18 @@
     </div>
 
     <div class="row">
-        <div class="col-md-12 text-center">
+        <div class="col-md-1">
+            <label class="control-label" for="numberPage">Number Per Page</label>
+        </div>
+        <div class="col-md-3">
+            <select name="numberPage" id="numberPage" class="form-control input-lg">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+            </select>
+        </div>
+        <div class="col-md-6 col-md-offset-2 text-center">
             <div class="paginator">
                 <a class="btn btn-sm btn-default pgn-btn-previous">Anterior</a>
                 <a class="pgn-link">1</a>
@@ -70,4 +85,148 @@
             </div>
         </div>
     </div>
+
+    <div id="modalNovo" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Cadastrar novo Cliente</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="cadastro-form">
+                            <form class="form-group">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="name_novo">Nome</label>
+                                        <input type="text" class="form-control" name="name_novo" id="name_novo"
+                                               placeholder="Insira o Nome">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="cpf_novo">Cpf</label>
+                                        <input type="text" class="form-control" name="cpf_novo" id="cpf_novo"
+                                               placeholder="Insira o Cpf">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <br>
+                                        <div class="checkbox">
+                                            <label class="control-label" for="status_novo"><input name="status_novo" id="status_novo"
+                                                                                type="checkbox" value="">Status</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <input type="submit"
+                                               class="btn btn-success btn-block form-control cadastro"
+                                               value="Criar Novo Cliente">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modalEditar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Editar Cliente</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="cadastro-form">
+                            <form class="form-group">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="id_editar">Id</label>
+                                        <input type="text" class="form-control" name="id_editar" id="id_editar">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="name_editar">Nome</label>
+                                        <input type="text" class="form-control" name="name_editar" id="name_editar"
+                                               placeholder="Insira o Nome">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="control-label" for="cpf_editar">Cpf</label>
+                                        <input type="text" class="form-control" name="cpf_editar" id="cpf_editar"
+                                               placeholder="Insira o Cpf">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <br>
+                                        <div class="checkbox">
+                                            <label class="control-label" for="status_editar"><input name="status_editar" id="status_editar"
+                                                                                type="checkbox" value="">Status</label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <input type="submit"
+                                               class="btn btn-success btn-block form-control cadastro"
+                                               value="Salvar alterações">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="modalExcluir" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Excluir Cliente</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-3">
+                            <button class="btn btn-success btn-block">Confirmar</button>
+                        </div>
+                        <div class="col-md-3">
+                            <button class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </div>
