@@ -13,6 +13,22 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
+/*Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
-});
+});*/
+
+/*Route::group(["prefix" => "client"], function () {
+    Route::get("all", ["name" => "all", "uses" => "ClientController@all"]);
+    Route::get("{client}", ["name" => "one", "uses" => "ClientController@one"]);
+    Route::post("add", ["name" => "add", "uses" => "ClientController@add"]);
+    Route::put("update", ["name" => "update", "uses" => "ClientController@update"]);
+    Route::delete("delete/{client}", ["name" => "delete", "uses" => "ClientController@delete"]);
+});*/
+
+Route::resource("client","ClientController");
+Route::resource("contact","ContactController");
+Route::resource("vehicle","VehicleController");
+Route::resource("service_order","ServiceOrderController");
+Route::resource("user","UserController");
+
+

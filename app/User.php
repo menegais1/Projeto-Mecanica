@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'login', 'password', 'status'
     ];
 
     /**
@@ -29,4 +29,11 @@ class User extends Authenticatable
     ];
 
     protected $table = 'user';
+
+    protected $casts = ['status' => 'boolean'];
+
+    public function serviceOrder()
+    {
+        return $this->hasMany('pjm\ServiceOrder');
+    }
 }
