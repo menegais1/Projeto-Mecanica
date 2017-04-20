@@ -1,7 +1,7 @@
 <?php
 
 
-$factory->define(pjm\ServiceOrder::class,function(Faker\Generator $faker){
+$factory->define(mecanica\ServiceOrder::class,function(Faker\Generator $faker){
 
     return [
       "client_id" => $faker->randomDigitNotNull,

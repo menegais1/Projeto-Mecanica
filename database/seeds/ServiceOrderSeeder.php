@@ -12,6 +12,6 @@ class ServiceOrderSeeder extends Seeder
     public function run()
     {
         DB::table('service_order')->truncate();
-        Factory(\pjm\ServiceOrder::class,20)->create();
+        Factory(\mecanica\ServiceOrder::class,20)->create();
     }
 }

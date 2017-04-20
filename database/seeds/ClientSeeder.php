@@ -12,6 +12,6 @@ class ClientSeeder extends Seeder
     public function run()
     {
         DB::table('client')->truncate();
-        Factory(\pjm\Client::class,20)->create();
+        Factory(\mecanica\Client::class,20)->create();
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace pjm\Http\Controllers;
+namespace mecanica\Http\Controllers;
 
 use Illuminate\Http\Request;
-use pjm\ServiceOrder;
+use mecanica\ServiceOrder;
 use Symfony\Component\EventDispatcher\Tests\Service;
 
 class ServiceOrderController extends Controller
@@ -36,9 +36,13 @@ class ServiceOrderController extends Controller
      */
     public function store(Request $request)
     {
-        $serviceOrder = new ServiceOrder();
-        $serviceOrder->fill($request->toArray());
-        $serviceOrder->save();
+        try {
+            $serviceOrder = new ServiceOrder();
+            $serviceOrder->fill($request->toArray());
+            $serviceOrder->save();
+        } catch (QueryException $e) {
+            return [];
+        }
         return $serviceOrder->toArray();
     }
 
@@ -73,9 +77,13 @@ class ServiceOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $serviceOrder = ServiceOrder::find($id);
-        $serviceOrder->fill($request->toArray());
-        $serviceOrder->save();
+        try {
+            $serviceOrder = ServiceOrder::find($id);
+            $serviceOrder->fill($request->toArray());
+            $serviceOrder->save();
+        } catch (QueryException $e) {
+            return [];
+        }
         return $serviceOrder->toArray();
     }
 

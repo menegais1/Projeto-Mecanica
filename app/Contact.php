@@ -1,6 +1,6 @@
 <?php
 
-namespace pjm;
+namespace mecanica;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -10,6 +10,6 @@ class Contact extends Model
     protected $fillable = ['client_id','name','email','phone'];
 
     public function client(){
-        return $this->belongsTo("pjm\Client");
+        return $this->belongsTo("mecanica\Client");
     }
 }

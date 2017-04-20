@@ -1,6 +1,6 @@
 <?php
 
-$factory->define(pjm\Vehicle::class, function (Faker\Generator $faker) {
+$factory->define(mecanica\Vehicle::class, function (Faker\Generator $faker) {
 
     return [
         "client_id" => $faker->randomDigitNotNull(),

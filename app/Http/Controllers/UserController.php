@@ -1,9 +1,9 @@
 <?php
 
-namespace pjm\Http\Controllers;
+namespace mecanica\Http\Controllers;
 
 use Illuminate\Http\Request;
-use pjm\User;
+use mecanica\User;
 
 class UserController extends Controller
 {
@@ -35,9 +35,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $user = new User();
-        $user->fill($request->toArray());
-        $user->save();
+        try {
+            $user = new User();
+            $user->fill($request->toArray());
+            $user->save();
+        } catch (QueryException $e) {
+            return [];
+        }
         return $user->toArray();
     }
 
@@ -72,9 +76,13 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-        $user->fill($request->toArray());
-        $user->save();
+        try {
+            $user = User::find($id);
+            $user->fill($request->toArray());
+            $user->save();
+        } catch (QueryException $e) {
+            return [];
+        }
         return $user->toArray();
     }
 

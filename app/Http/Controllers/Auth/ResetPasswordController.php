@@ -1,8 +1,8 @@
 <?php
 
-namespace pjm\Http\Controllers\Auth;
+namespace mecanica\Http\Controllers\Auth;
 
-use pjm\Http\Controllers\Controller;
+use mecanica\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller

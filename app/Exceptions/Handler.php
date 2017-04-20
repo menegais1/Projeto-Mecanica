@@ -1,6 +1,6 @@
 <?php
 
-namespace pjm\Exceptions;
+namespace mecanica\Exceptions;
 
 use Exception;
 use Illuminate\Auth\AuthenticationException;

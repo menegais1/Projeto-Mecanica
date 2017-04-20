@@ -12,6 +12,6 @@ class ContactSeeder extends Seeder
     public function run()
     {
         DB::table('contact')->truncate();
-        Factory(\pjm\Contact::class,20)->create();
+        Factory(\mecanica\Contact::class,20)->create();
     }
 }

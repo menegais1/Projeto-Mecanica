@@ -1,9 +1,10 @@
 <?php
 
-namespace pjm\Http\Controllers;
+namespace mecanica\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use pjm\Client;
+use mecanica\Client;
 
 class ClientController extends Controller
 {
@@ -35,9 +36,13 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $client = new Client();
-        $client->fill($request->toArray());
-        $client->save();
+        try {
+            $client = new Client();
+            $client->fill($request->toArray());
+            $client->save();
+        } catch (QueryException $e) {
+            return [];
+        }
         return $client->toArray();
     }
 
@@ -72,9 +77,13 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $client = Client::find($id);
-        $client->fill($request->toArray());
-        $client->save();
+        try {
+            $client = Client::find($id);
+            $client->fill($request->toArray());
+            $client->save();
+        } catch (QueryException $e) {
+            return [];
+        }
         return $client->toArray();
     }
 
@@ -86,6 +95,6 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        return (String) (Client::find($id)->delete());
+        return (String)(Client::find($id)->delete());
     }
 }

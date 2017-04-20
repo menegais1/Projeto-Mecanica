@@ -34,18 +34,18 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
+            <tr ng-repeat="client in clients">
                 <td>
-                    12
+                    {{client.id}}
                 </td>
                 <td>
-                    Roberto Menegais
+                    {{client.name}}
                 </td>
                 <td>
-                    ypk-8228
+                    {{client.cpf}}
                 </td>
                 <td>
-                    2007
+                    {{client.status}}
                 </td>
 
                 <td>

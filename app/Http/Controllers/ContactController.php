@@ -1,9 +1,10 @@
 <?php
 
-namespace pjm\Http\Controllers;
+namespace mecanica\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use pjm\Contact;
+use mecanica\Contact;
 class ContactController extends Controller
 {
     /**
@@ -34,9 +35,13 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        $contact = new Contact();
-        $contact->fill($request->toArray());
-        $contact->save();
+        try {
+            $contact = new Contact();
+            $contact->fill($request->toArray());
+            $contact->save();
+        } catch (QueryException $e) {
+            return [];
+        }
         return $contact->toArray();
     }
 
@@ -71,9 +76,13 @@ class ContactController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $contact = Contact::find($id);
-        $contact->fill($request->toArray());
-        $contact->save();
+        try {
+            $contact = Contact::find($id);
+            $contact->fill($request->toArray());
+            $contact->save();
+        } catch (QueryException $e) {
+            return [];
+        }
         return $contact->toArray();
     }
 

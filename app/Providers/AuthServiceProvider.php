@@ -1,6 +1,6 @@
 <?php
 
-namespace pjm\Providers;
+namespace mecanica\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -13,7 +13,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'pjm\Model' => 'pjm\Policies\ModelPolicy',
+        'mecanica\Model' => 'mecanica\Policies\ModelPolicy',
     ];
 
     /**

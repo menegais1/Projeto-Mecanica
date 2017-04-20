@@ -1,6 +1,6 @@
 <?php
 
-namespace pjm;
+namespace mecanica;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,11 +12,11 @@ class Vehicle extends Model
 
     public function client()
     {
-        return $this->belongsTo("pjm\Client");
+        return $this->belongsTo("mecanica\Client");
     }
 
     public function serviceOrder()
     {
-        return $this->hasMany('pjm\ServiceOrder');
+        return $this->hasMany('mecanica\ServiceOrder');
     }
 }

@@ -1,9 +1,9 @@
 <?php
 
-namespace pjm\Http\Controllers\Auth;
+namespace mecanica\Http\Controllers\Auth;
 
-use pjm\User;
-use pjm\Http\Controllers\Controller;
+use mecanica\User;
+use mecanica\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 

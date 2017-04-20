@@ -1,6 +1,6 @@
 <?php
 
-namespace pjm\Providers;
+namespace mecanica\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Broadcast;

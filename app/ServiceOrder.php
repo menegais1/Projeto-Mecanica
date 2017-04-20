@@ -1,6 +1,6 @@
 <?php
 
-namespace pjm;
+namespace mecanica;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,16 +11,16 @@ class ServiceOrder extends Model
 
 
     public function client(){
-        return $this->belongsTo("pjm\Client");
+        return $this->belongsTo("mecanica\Client");
     }
 
 
     public function user(){
-        return $this->belongsTo("pjm\User");
+        return $this->belongsTo("mecanica\User");
     }
 
 
     public function vehicle(){
-        return $this->belongsTo("pjm\Vehicle");
+        return $this->belongsTo("mecanica\Vehicle");
     }
 }

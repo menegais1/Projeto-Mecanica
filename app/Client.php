@@ -1,6 +1,6 @@
 <?php
 
-namespace pjm;
+namespace mecanica;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,14 +12,14 @@ class Client extends Model
     protected $casts = ["status" => "boolean"];
 
     public function contacts(){
-        return $this->hasMany('pjm\Contact');
+        return $this->hasMany('mecanica\Contact');
     }
 
     public function vehicles(){
-        return $this->hasMany('pjm\Vehicle');
+        return $this->hasMany('mecanica\Vehicle');
     }
 
     public function serviceOrders(){
-        return $this->hasMany('pjm\ServiceOrder');
+        return $this->hasMany('mecanica\ServiceOrder');
     }
 }

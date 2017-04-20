@@ -1,6 +1,6 @@
 <?php
 
-$factory->define(pjm\User::class, function(Faker\Generator $faker){
+$factory->define(mecanica\User::class, function(Faker\Generator $faker){
 
     return [
             "name"=>$faker->name,

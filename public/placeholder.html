@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html ng-app="mecanica">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Página Inicial</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="css/AdminLTE.min.css">
+    <link rel="stylesheet" href="css/skin-red.min.css">
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="lib/jquery-3.2.1.min.js"></script>
+    <script src="js/AdminLTE.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
+
+    <script src="lib/angular.js"></script>
+    <script src="js/mecanica.js"></script>
+    <script src="js/controllers/mecanicaController.js"></script>
+</head>
+
+<body class="hold-transition skin-red sidebar-mini" ng-controller="mecanicaController">
+<div class="wrapper">
+
+    <header class="main-header" ng-include="'views/includes/header.html'"></header>
+    <aside class="main-sidebar" ng-include="'views/includes/sidebar.html'"></aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <br>
+            <h1>
+                Cliente + {{teste}}
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Tabelas</a></li>
+                <li class="active">Cliente</li>
+            </ol>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="row data">
+                    <div class="row">
+
+                        <div class="col-md-6">
+
+                            <button data-toggle="modal" data-target="#modalNovo" class="btn btn-success btn-block btn-novo">Novo Contato
+                            </button>
+
+                        </div>
+                        <div class="col-md-6 ">
+                            <input class="form-control input-lg" id="search" type="text" placeholder="Procurar..."
+                                   name="search">
+
+                        </div>
+                    </div>
+                    <br>
+                    <div class="col-md-12">
+                        <table class="table table-bordered table-striped table-padded table-data">
+                            <thead>
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Cliente
+                                </th>
+                                <th>
+                                    Nome
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Telefone
+                                </th>
+                                <th>
+                                    Funções
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    12
+                                </td>
+                                <td>
+                                    Roberto Menegais
+                                </td>
+                                <td>
+                                    ypk-8228
+                                </td>
+                                <td>
+                                    Ford
+                                </td>
+                                <td>
+                                    2007
+                                </td>
+
+                                <td>
+                                    <button data-toggle="modal" data-target="#modalEditar" class="btn btn-sm btn-primary">Editar
+                                    </button>
+                                    <button data-toggle="modal" data-target="#modalExcluir" class="btn btn-sm btn-warning">Excluir
+                                    </button>
+                                </td>
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1">
+                            <label class="control-label" for="numberPage">Number Per Page</label>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="numberPage" id="numberPage" class="form-control input-lg">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="15">15</option>
+                                <option value="20">20</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 col-md-offset-2 text-center">
+                            <div class="paginator">
+                                <a class="btn btn-sm btn-default pgn-btn-previous">Anterior</a>
+                                <a class="pgn-link">1</a>
+                                <a class="pgn-link">2</a>
+                                <a class="pgn-link">3</a>
+                                <a class="pgn-link">4</a>
+                                <a class="pgn-link">5</a>
+                                <a class="btn btn-sm btn-default pgn-btn-next">Próximo</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="modalNovo" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Cadastrar novo Contato</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="cadastro-form">
+                                            <form class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label" for="client_id_novo">Cliente</label>
+                                                        <select class="form-control" name="client_id_novo" id="client_id_novo">
+                                                            <option value="0">Placeholder</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label" for="name_novo">Nome</label>
+                                                        <input type="text" class="form-control" name="name_novo" id="name_novo"
+                                                               placeholder="Insira o Nome">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label" for="email_novo">Email</label>
+                                                        <input type="text" class="form-control" name="email_novo"
+                                                               id="email_novo"
+                                                               placeholder="Insira o Email">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label" for="phone_novo">Telefone</label>
+                                                        <input type="text" class="form-control" name="phone_novo"
+                                                               id="phone_novo"
+                                                               placeholder="Insira o Telefone">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <input type="submit"
+                                                               class="btn btn-success btn-block form-control cadastro"
+                                                               value="Criar Novo Contato">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="modalEditar" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Editar Contato</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="cadastro-form">
+                                            <form class="form-group">
+
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label" for="id_editar">Id</label>
+                                                        <input type="text" class="form-control" name="id_editar" id="id_editar">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label" for="client_id_editar">Cliente</label>
+                                                        <select class="form-control" name="client_id_editar" id="client_id_editar">
+                                                            <option value="0">Placeholder</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label" for="name_editar">Nome</label>
+                                                        <input type="text" class="form-control" name="name_editar" id="name_editar"
+                                                               placeholder="Insira o Nome">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label" for="email_editar">Email</label>
+                                                        <input type="text" class="form-control" name="email_editar"
+                                                               id="email_editar"
+                                                               placeholder="Insira o Email">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label class="control-label" for="phone_editar">Telefone</label>
+                                                        <input type="text" class="form-control" name="phone_editar"
+                                                               id="phone_editar"
+                                                               placeholder="Insira o Telefone">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-md-offset-3">
+                                                        <input type="submit"
+                                                               class="btn btn-success btn-block form-control cadastro"
+                                                               value="Salvar alterações">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="modalExcluir" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Excluir Contato</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-3 col-md-offset-3">
+                                            <button class="btn btn-success btn-block">Confirmar</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    <footer class="main-footer" ng-include="'views/includes/footer.html'"></footer>
+
+</div>
+<!-- ./wrapper -->
+
+
+</body>
+</html>

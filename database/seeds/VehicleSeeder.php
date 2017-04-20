@@ -12,6 +12,6 @@ class VehicleSeeder extends Seeder
     public function run()
     {
         DB::table('vehicle')->truncate();
-        Factory(\pjm\Vehicle::class,20)->create();
+        Factory(\mecanica\Vehicle::class,20)->create();
     }
 }

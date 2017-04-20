@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
-<html>
+<html ng-app="mecanica">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,7 +7,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.6 -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="css/AdminLTE.min.css">
@@ -24,17 +20,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="lib/jquery-3.2.1.min.js"></script>
     <script src="js/AdminLTE.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="lib/bootstrap.min.js"></script>
 
+    <script src="lib/angular.js"></script>
+    <script src="js/mecanica.js"></script>
+    <script src="js/controllers/mecanicaController.js"></script>
 </head>
 
-<body class="hold-transition skin-red sidebar-mini">
+<body class="hold-transition skin-red sidebar-mini" ng-controller="mecanicaController">
 <div class="wrapper">
 
-    <!-- Main Header -->
-    <header class="main-header">
+    <header class="main-header"><!-- Main Header -->
+        <!--<header class="main-header">-->
 
         <!-- Logo -->
         <a href="#" class="logo">
@@ -91,10 +90,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </ul>
             </div>
         </nav>
+        <!--</header>-->
     </header>
-    <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
+        <!-- Left side column. contains the logo and sidebar -->
 
+        <!--
+        <aside class="main-sidebar">
+        -->
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
 
@@ -132,8 +135,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.sidebar-menu -->
         </section>
         <!-- /.sidebar -->
-    </aside>
 
+        <!--
+        </aside>-->
+    </aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
@@ -155,12 +160,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
                 <div class="row data">
                     <div class="row">
-
                         <div class="col-md-6">
-
-                            <button data-toggle="modal" data-target="#modalNovo" class="btn btn-success btn-block btn-novo">Novo Contato
+                            <button data-toggle="modal" data-target="#modalNovo"
+                                    ng-click="abrirClient()" class="btn btn-success btn-block btn-novo">Novo Cliente
                             </button>
-
                         </div>
                         <div class="col-md-6 ">
                             <input class="form-control input-lg" id="search" type="text" placeholder="Procurar..."
@@ -177,49 +180,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     Id
                                 </th>
                                 <th>
-                                    Cliente
-                                </th>
-                                <th>
                                     Nome
                                 </th>
                                 <th>
-                                    Email
+                                    Cpf
                                 </th>
                                 <th>
-                                    Telefone
+                                    Status
                                 </th>
+
                                 <th>
                                     Funções
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    12
+                            <tr ng-repeat="client in clients">
+                                <td ng-bind="client.id">
                                 </td>
-                                <td>
-                                    Roberto Menegais
+                                <td ng-bind="client.name">
                                 </td>
-                                <td>
-                                    ypk-8228
+                                <td ng-bind="client.cpf">
                                 </td>
-                                <td>
-                                    Ford
-                                </td>
-                                <td>
-                                    2007
-                                </td>
+                                <td ng-bind="client.status">
 
+                                </td>
                                 <td>
-                                    <button data-toggle="modal" data-target="#modalEditar" class="btn btn-sm btn-primary">Editar
+                                    <button data-toggle="modal" ng-click="carregarDados(client)"
+                                            data-target="#modalEditar"
+                                            class="btn btn-sm btn-primary">Editar
                                     </button>
-                                    <button data-toggle="modal" data-target="#modalExcluir" class="btn btn-sm btn-warning">Excluir
+                                    <button data-toggle="modal" data-target="#modalExcluir"
+                                            ng-click="carregarDados(client)"
+                                            class="btn btn-sm btn-warning">Excluir
                                     </button>
                                 </td>
 
                             </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -256,44 +253,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Cadastrar novo Contato</h4>
+                                    <h4 class="modal-title">Cadastrar novo Cliente</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="cadastro-form">
-                                            <form class="form-group">
+                                            <form class="form-group" name="clientFormNovo">
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label class="control-label" for="client_id_novo">Cliente</label>
-                                                        <select class="form-control" name="client_id_novo" id="client_id_novo">
-                                                            <option value="0">Placeholder</option>
-                                                        </select>
+                                                        <label class="control-label" for="name_novo">Nome</label>
+                                                        <input ng-required="true" type="text" class="form-control"
+                                                               name="name"
+                                                               ng-model="client.name"
+                                                               id="name_novo"
+                                                               placeholder="Insira o Nome">
                                                     </div>
                                                     <div class="col-md-6">
-                                                        <label class="control-label" for="name_novo">Nome</label>
-                                                        <input type="text" class="form-control" name="name_novo" id="name_novo"
-                                                               placeholder="Insira o Nome">
+                                                        <label class="control-label" for="cpf_novo">Cpf</label>
+                                                        <input ng-required="true"
+                                                               ng-pattern="/^\d{3}.\d{3}.\d{3}-\d{2}$/" type="text"
+                                                               class="form-control" name="cpf"
+                                                               ng-model="client.cpf"
+                                                               id="cpf_novo"
+                                                               placeholder="Insira o Cpf">
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label class="control-label" for="email_novo">Email</label>
-                                                        <input type="text" class="form-control" name="email_novo"
-                                                               id="email_novo"
-                                                               placeholder="Insira o Email">
+                                                        <br>
+                                                        <div class="checkbox">
+                                                            <label class="control-label" for="status_novo"><input
+                                                                    name="status" id="status_novo"
+                                                                    ng-model="client.status"
+                                                                    type="checkbox" value="">Status</label>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="phone_novo">Telefone</label>
-                                                        <input type="text" class="form-control" name="phone_novo"
-                                                               id="phone_novo"
-                                                               placeholder="Insira o Telefone">
-                                                    </div>
+
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6 col-md-offset-3">
-                                                        <input type="submit"
-                                                               class="btn btn-success btn-block form-control cadastro"
-                                                               value="Criar Novo Contato">
+                                                        <button data-dismiss="modal"
+                                                                ng-disabled="clientFormNovo.$invalid"
+                                                                ng-click="salvarClient(client)"
+                                                                class="btn btn-primary btn-block form-control cadastro">
+                                                            Criar Novo Cliente
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -316,51 +320,59 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Editar Contato</h4>
+                                    <h4 class="modal-title">Editar Cliente</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="cadastro-form">
-                                            <form class="form-group">
+                                            <form class="form-group" name="clientFormEditar">
 
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label class="control-label" for="id_editar">Id</label>
-                                                        <input type="text" class="form-control" name="id_editar" id="id_editar">
+                                                        <input ng-required="true" ng-disabled="true" type="text"
+                                                               ng-model="client.id" class="form-control"
+                                                               name="id"
+                                                               id="id_editar">
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="client_id_editar">Cliente</label>
-                                                        <select class="form-control" name="client_id_editar" id="client_id_editar">
-                                                            <option value="0">Placeholder</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
                                                     <div class="col-md-6">
                                                         <label class="control-label" for="name_editar">Nome</label>
-                                                        <input type="text" class="form-control" name="name_editar" id="name_editar"
+                                                        <input ng-required="true" type="text" class="form-control"
+                                                               name="name"
+                                                               ng-model="client.name"
+                                                               id="name_editar"
                                                                placeholder="Insira o Nome">
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="email_editar">Email</label>
-                                                        <input type="text" class="form-control" name="email_editar"
-                                                               id="email_editar"
-                                                               placeholder="Insira o Email">
-                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label class="control-label" for="phone_editar">Telefone</label>
-                                                        <input type="text" class="form-control" name="phone_editar"
-                                                               id="phone_editar"
-                                                               placeholder="Insira o Telefone">
+                                                        <label class="control-label" for="cpf_editar">Cpf</label>
+                                                        <input ng-pattern="/^\d{3}.\d{3}.\d{3}-\d{2}$/"
+                                                               ng-required="true" type="text" class="form-control"
+                                                               name="cpf"
+                                                               ng-model="client.cpf"
+                                                               id="cpf_editar"
+                                                               placeholder="Insira o Cpf">
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <br>
+                                                        <div class="checkbox">
+                                                            <label class="control-label" for="status_editar"><input
+                                                                    name="status" id="status_editar"
+                                                                    ng-model="client.status"
+                                                                    type="checkbox" value="">Status</label>
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="row">
                                                     <div class="col-md-6 col-md-offset-3">
-                                                        <input type="submit"
-                                                               class="btn btn-success btn-block form-control cadastro"
-                                                               value="Salvar alterações">
+                                                        <button ng-disabled="clientFormEditar.$invalid"
+                                                                data-dismiss="modal"
+                                                                class="btn btn-success btn-block form-control cadastro"
+                                                                ng-click="editarClient(client)"
+                                                        >Salvar alterações
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -383,15 +395,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Excluir Contato</h4>
+                                    <h4 class="modal-title">Excluir Cliente</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-3 col-md-offset-3">
-                                            <button class="btn btn-success btn-block">Confirmar</button>
+                                            <button class="btn btn-success btn-block" data-dismiss="modal"
+                                                    ng-click="excluirClient(client)">
+                                                Confirmar
+                                            </button>
                                         </div>
                                         <div class="col-md-3">
-                                            <button class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
+                                            <button class="btn btn-danger btn-block" data-dismiss="modal">Cancelar
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -412,16 +428,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
     </div>
     <!-- /.content-wrapper -->
 
-    <!-- Main Footer -->
+
     <footer class="main-footer">
+        <!-- Main Footer -->
+        <!--<footer class="main-footer">-->
         <!-- To the right -->
         <!--  <div class="pull-right hidden-xs">
               Anything you want
           </div>-->
         <!-- Default to the left -->
         <strong>Copyright &copy; 2016 <a href="#">Developer </a>Roberto Menegais</strong> All rights reserved.
+        <!--
+        </footer>-->
     </footer>
-
 
 </div>
 <!-- ./wrapper -->

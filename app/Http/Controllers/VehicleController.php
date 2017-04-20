@@ -1,9 +1,9 @@
 <?php
 
-namespace pjm\Http\Controllers;
+namespace mecanica\Http\Controllers;
 
 use Illuminate\Http\Request;
-use pjm\Vehicle;
+use mecanica\Vehicle;
 
 class VehicleController extends Controller
 {
@@ -35,9 +35,13 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        $vehicle = new Vehicle();
-        $vehicle->fill($request->toArray());
-        $vehicle->save();
+        try {
+            $vehicle = new Vehicle();
+            $vehicle->fill($request->toArray());
+            $vehicle->save();
+        } catch (QueryException $e) {
+            return [];
+        }
         return $vehicle->toArray();
     }
 
@@ -72,9 +76,13 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $vehicle = Vehicle::find($id);
-        $vehicle->fill($request->toArray());
-        $vehicle->save();
+        try {
+            $vehicle = Vehicle::find($id);
+            $vehicle->fill($request->toArray());
+            $vehicle->save();
+        } catch (QueryException $e) {
+            return [];
+        }
         return $vehicle->toArray();
     }
 

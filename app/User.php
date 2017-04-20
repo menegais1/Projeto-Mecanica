@@ -1,6 +1,6 @@
 <?php
 
-namespace pjm;
+namespace mecanica;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -34,6 +34,6 @@ class User extends Authenticatable
 
     public function serviceOrder()
     {
-        return $this->hasMany('pjm\ServiceOrder');
+        return $this->hasMany('mecanica\ServiceOrder');
     }
 }

@@ -171,11 +171,11 @@ return [
         /*
          * Application Service Providers...
          */
-        pjm\Providers\AppServiceProvider::class,
-        pjm\Providers\AuthServiceProvider::class,
-        // pjm\Providers\BroadcastServiceProvider::class,
-        pjm\Providers\EventServiceProvider::class,
-        pjm\Providers\RouteServiceProvider::class,
+        mecanica\Providers\AppServiceProvider::class,
+        mecanica\Providers\AuthServiceProvider::class,
+        // mecanica\Providers\BroadcastServiceProvider::class,
+        mecanica\Providers\EventServiceProvider::class,
+        mecanica\Providers\RouteServiceProvider::class,
 
     ],
 
