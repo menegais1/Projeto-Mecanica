@@ -12,11 +12,12 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param $limit
+     * @return Response
      */
-    public function index()
+    public function index($limit)
     {
-        return response(Client::all()->toArray(), 200);
+        return response(Client::query()->orderBy("id")->limit($limit)->get()->toArray(), 200);
     }
 
     /**
@@ -83,9 +84,9 @@ class ClientController extends Controller
             $client->fill($request->toArray());
             $client->save();
         } catch (QueryException $e) {
-            return [];
+            return response([], 200);
         }
-        return $client->toArray();
+        return response($client->toArray(), 200);
     }
 
     /**
@@ -96,6 +97,6 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        return (String)(Client::find($id)->delete());
+        return response((String)(Client::find($id)->delete()));
     }
 }

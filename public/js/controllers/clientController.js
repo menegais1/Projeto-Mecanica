@@ -15,41 +15,45 @@ angular.module("mecanica").controller("clientController", function ($scope, $htt
         $scope.client = angular.copy(client);
     };
 
-    var carregarClients = function () {
-        $http.get('http://127.0.0.1:8000/api/client').then(function (data) {
+    var carregarClients = function (numberPage) {
+        $http.get('http://127.0.0.1:8000/api/client/' + (numberPage || 5)
+        ).then(function (data) {
+            console.log(numberPage);
+            console.log(data.data);
             $scope.clients = data.data;
         });
     };
 
-    $scope.salvarClient = function (client) {
-        if(!client.status){
+    $scope.salvarClient = function (client, numberPage) {
+        if (!client.status) {
             client.status = false;
         }
         $http.post('http://127.0.0.1:8000/api/client', client).then(function (data) {
-            $scope.clients.push(data.data);
+            console.log(data.data);
+            carregarClients(numberPage);
             delete $scope.client;
             $('#modalNovo').modal('hide');
         });
 
     };
 
-    $scope.editarClient = function (client) {
-        var indice = $scope.clients.indexOf($scope.clients.filter(function (element) {
-            return element.id == client.id;
-        }).shift());
-        $scope.clients.splice(indice, 1, client);
-        delete $scope.client;
-        $('#modalEditar').modal('hide');
-
+    $scope.editarClient = function (client, numberPage) {
+        $http.put('http://127.0.0.1:8000/api/client/' + client.id, client).then(function (data) {
+            console.log(data.data);
+            carregarClients(numberPage);
+            delete $scope.client;
+            $('#modalEditar').modal('hide');
+        });
     };
 
-    $scope.excluirClient = function (client) {
-
-        $scope.clients = $scope.clients.filter(function (element) {
-            return element.id != client.id;
+    $scope.excluirClient = function (client, numberPage) {
+        $http.delete('http://127.0.0.1:8000/api/client/' + client.id).then(function (data) {
+            console.log(data.data);
+            carregarClients(numberPage);
+            delete $scope.client;
+            $('#modalExcluir').modal('hide');
         });
-        delete $scope.client;
-        $('#modalExcluir').modal('hide');
+
     };
 
     $scope.abrirClient = function (form) {
@@ -84,6 +88,12 @@ angular.module("mecanica").controller("clientController", function ($scope, $htt
         $scope.ordem = !$scope.ordem;
     }
 
-    carregarClients();
+    $scope.numberPerPage = function (numberPage) {
+        console.log(numberPage);
+        carregarClients(numberPage);
+    };
+
+
+    carregarClients(5);
 
 });
