@@ -2,24 +2,9 @@
  * Created by Roberto Menegais on 19/04/2017.
  */
 
-angular.module("mecanica").controller("clientController", function ($scope) {
+angular.module("mecanica").controller("clientController", function ($scope, $http) {
 
-    $scope.clients = [{
-        id: 1,
-        name: "roberto",
-        cpf: 11111111,
-        status: true
-    }, {
-        id: 2,
-        name: "roberci",
-        cpf: 11111111,
-        status: false
-    }, {
-        id: 3,
-        name: "maria",
-        cpf: 22222222,
-        status: true
-    }];
+    $scope.clients = [];
 
     $scope.limparFormulario = function (form) {
         form.$setPristine();
@@ -30,10 +15,21 @@ angular.module("mecanica").controller("clientController", function ($scope) {
         $scope.client = angular.copy(client);
     };
 
+    var carregarClients = function () {
+        $http.get('http://127.0.0.1:8000/api/client').then(function (data) {
+            $scope.clients = data.data;
+        });
+    };
+
     $scope.salvarClient = function (client) {
-        $scope.clients.push(client);
-        delete $scope.client;
-        $('#modalNovo').modal('hide');
+        if(!client.status){
+            client.status = false;
+        }
+        $http.post('http://127.0.0.1:8000/api/client', client).then(function (data) {
+            $scope.clients.push(data.data);
+            delete $scope.client;
+            $('#modalNovo').modal('hide');
+        });
 
     };
 
@@ -83,7 +79,11 @@ angular.module("mecanica").controller("clientController", function ($scope) {
         return false;
     }
 
+    $scope.ordernarPor = function (input) {
+        $scope.ordenacao = input;
+        $scope.ordem = !$scope.ordem;
+    }
 
-
+    carregarClients();
 
 });

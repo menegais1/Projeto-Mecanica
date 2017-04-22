@@ -4,6 +4,7 @@ namespace mecanica\Http\Controllers;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use mecanica\Client;
 
 class ClientController extends Controller
@@ -15,7 +16,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        return Client::all();
+        return response(Client::all()->toArray(), 200);
     }
 
     /**
@@ -41,9 +42,9 @@ class ClientController extends Controller
             $client->fill($request->toArray());
             $client->save();
         } catch (QueryException $e) {
-            return [];
+            return response([], 200);
         }
-        return $client->toArray();
+        return response($client->toArray(), 200);
     }
 
     /**

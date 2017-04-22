@@ -24,6 +24,9 @@ use Illuminate\Http\Request;
     Route::put("update", ["name" => "update", "uses" => "ClientController@update"]);
     Route::delete("delete/{client}", ["name" => "delete", "uses" => "ClientController@delete"]);
 });*/
+header('Access-Control-Allow-Origin:  *');
+header('Access-Control-Allow-Methods:  GET,PUT,POST,DELETE,OPTIONS');
+header('Access-Control-Allow-Headers:  Content-Type');
 
 Route::resource("client","ClientController");
 Route::resource("contact","ContactController");

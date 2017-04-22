@@ -168,7 +168,8 @@
                             </button>
                         </div>
                         <div class="col-md-6 ">
-                            <input class="form-control input-lg" id="search" type="text" placeholder="Procurar..."
+                            <input class="form-control input-lg" ng-model='search' id="search" type="text"
+                                   placeholder="Procurar..."
                                    name="search">
 
                         </div>
@@ -179,16 +180,16 @@
                             <thead>
                             <tr>
                                 <th>
-                                    Id
+                                    <a href="#" ng-click="ordernarPor('id')">Id</a>
                                 </th>
                                 <th>
-                                    Nome
+                                    <a href="#" ng-click="ordernarPor('nome')">Nome</a>
                                 </th>
                                 <th>
-                                    Cpf
+                                    <a href="#" ng-click="ordernarPor('cpf')">Cpf</a>
                                 </th>
                                 <th>
-                                    Status
+                                    <a href="#" ng-click="ordernarPor('status')">Status</a>
                                 </th>
 
                                 <th>
@@ -197,7 +198,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="client in clients">
+                            <tr ng-repeat="client in clients | limitTo: numberPage || 5 | filter:search | orderBy:ordenacao:ordem">
                                 <td ng-bind="client.id">
                                 </td>
                                 <td ng-bind="client.name">
@@ -228,12 +229,16 @@
                             <label class="control-label" for="numberPage">Number Per Page</label>
                         </div>
                         <div class="col-md-3">
-                            <select name="numberPage" id="numberPage" class="form-control input-lg">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                            </select>
+                            <form>
+                                <select ng-model="numberPage" name="numberPage" id="numberPage"
+                                        class="form-control input-lg">
+                                    <option value="">Number Per Page (5)</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </form>
                         </div>
                         <div class="col-md-6 col-md-offset-2 text-center">
                             <div class="paginator">
