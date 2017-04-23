@@ -28,7 +28,7 @@ header('Access-Control-Allow-Origin:  *');
 header('Access-Control-Allow-Methods:  GET,PUT,POST,DELETE,OPTIONS');
 header('Access-Control-Allow-Headers:  Content-Type');
 
-Route::get('client/{offset}','ClientController@index');
+Route::get('client/{offset}/{limit}','ClientController@index');
 Route::resource("client","ClientController");
 Route::resource("contact","ContactController");
 Route::resource("vehicle","VehicleController");

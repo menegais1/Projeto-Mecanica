@@ -12,12 +12,15 @@ class ClientController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param $offset
      * @param $limit
      * @return Response
      */
-    public function index($limit)
+    public function index($offset,$limit)
     {
-        return response(Client::query()->orderBy("id")->limit($limit)->get()->toArray(), 200);
+        $total =Client::query()->orderBy("id")->offset($offset)->limit($limit)->get()->toArray();
+        array_push($total, Client::query()->count());
+        return response($total, 200);
     }
 
     /**

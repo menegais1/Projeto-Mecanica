@@ -6,6 +6,7 @@ angular.module("mecanica").controller("clientController", function ($scope, $htt
 
     $scope.clients = [];
 
+
     $scope.limparFormulario = function (form) {
         form.$setPristine();
         form.$setUntouched();
@@ -15,41 +16,53 @@ angular.module("mecanica").controller("clientController", function ($scope, $htt
         $scope.client = angular.copy(client);
     };
 
-    var carregarClients = function (numberPage) {
-        $http.get('http://127.0.0.1:8000/api/client/' + (numberPage || 5)
+    var carregarClients = function (numberPage, page) {
+        numberPage = (numberPage) ? numberPage : 5;
+        page = (page) ? (page * numberPage) : 0;
+        $http.get('http://127.0.0.1:8000/api/client/' + page + '/' + numberPage
         ).then(function (data) {
             console.log(numberPage);
+            console.log(page);
             console.log(data.data);
-            $scope.clients = data.data;
+            console.log(data.data[data.data.length - 1]);
+
+            var clients = data.data.splice(0, data.data.length - 1);
+            var total = data.data.shift();
+            $scope.pages = [];
+            for (var i = 0; i < Math.ceil((total / numberPage)); i++) {
+                $scope.pages.push(i);
+            }
+            $scope.clients = clients;
+
         });
     };
 
-    $scope.salvarClient = function (client, numberPage) {
+    $scope.salvarClient = function (client, numberPage, page) {
         if (!client.status) {
             client.status = false;
         }
         $http.post('http://127.0.0.1:8000/api/client', client).then(function (data) {
             console.log(data.data);
-            carregarClients(numberPage);
+            carregarClients(numberPage, page);
             delete $scope.client;
             $('#modalNovo').modal('hide');
         });
 
     };
 
-    $scope.editarClient = function (client, numberPage) {
+    $scope.editarClient = function (client, numberPage, page) {
         $http.put('http://127.0.0.1:8000/api/client/' + client.id, client).then(function (data) {
             console.log(data.data);
-            carregarClients(numberPage);
+            carregarClients(numberPage, page);
             delete $scope.client;
             $('#modalEditar').modal('hide');
         });
     };
 
-    $scope.excluirClient = function (client, numberPage) {
+    $scope.excluirClient = function (client, numberPage, page) {
         $http.delete('http://127.0.0.1:8000/api/client/' + client.id).then(function (data) {
             console.log(data.data);
-            carregarClients(numberPage);
+            carregarClients(numberPage, page);
             delete $scope.client;
             $('#modalExcluir').modal('hide');
         });
@@ -88,12 +101,12 @@ angular.module("mecanica").controller("clientController", function ($scope, $htt
         $scope.ordem = !$scope.ordem;
     }
 
-    $scope.numberPerPage = function (numberPage) {
+    $scope.numberPerPage = function (numberPage, page) {
         console.log(numberPage);
-        carregarClients(numberPage);
+        carregarClients(numberPage, page);
     };
 
 
-    carregarClients(5);
+    carregarClients(5, 0);
 
 });

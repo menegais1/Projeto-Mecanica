@@ -183,7 +183,7 @@
                                     <a href="#" ng-click="ordernarPor('id')">Id</a>
                                 </th>
                                 <th>
-                                    <a href="#" ng-click="ordernarPor('nome')">Nome</a>
+                                    <a href="#" ng-click="ordernarPor('name')">Nome</a>
                                 </th>
                                 <th>
                                     <a href="#" ng-click="ordernarPor('cpf')">Cpf</a>
@@ -209,7 +209,7 @@
 
                                 </td>
                                 <td>
-                                    <button data-toggle="modal" ng-click="carregarDados(client,clientFormEditar)"
+                                    <button data-toggle="modal" ng-click="carregarDados(client)"
                                             data-target="#modalEditar"
                                             class="btn btn-sm btn-primary">Editar
                                     </button>
@@ -230,7 +230,7 @@
                         </div>
                         <div class="col-md-3">
                             <form>
-                                <select ng-change="numberPerPage(numberPage)" ng-model="numberPage" name="numberPage"
+                                <select ng-change="numberPerPage(numberPage,page)" ng-model="numberPage" name="numberPage"
                                         id="numberPage"
                                         class="form-control input-lg">
                                     <option value="">Number Per Page (5)</option>
@@ -244,11 +244,13 @@
                         <div class="col-md-6 col-md-offset-2 text-center">
                             <div class="paginator">
                                 <a class="btn btn-sm btn-default pgn-btn-previous">Anterior</a>
-                                <a class="pgn-link">1</a>
-                                <a class="pgn-link">2</a>
+                                <a ng-click="numberPerPage(numberPage,page)" href="#" ng-repeat="page in pages" class="pgn-link">
+                                    {{page + 1}}
+                                </a>
+                               <!-- <a class="pgn-link">2</a>
                                 <a class="pgn-link">3</a>
                                 <a class="pgn-link">4</a>
-                                <a class="pgn-link">5</a>
+                                <a class="pgn-link">5</a>-->
                                 <a class="btn btn-sm btn-default pgn-btn-next">Próximo</a>
                             </div>
                         </div>
@@ -324,7 +326,7 @@
                                                     <div class="col-md-6 col-md-offset-3">
                                                         <button data-dismiss="modal"
                                                                 ng-disabled="clientFormNovo.$invalid"
-                                                                ng-click="salvarClient(client,numberPage)"
+                                                                ng-click="salvarClient(client,numberPage,page)"
                                                                 class="btn btn-primary btn-block form-control cadastro">
                                                             Criar Novo Cliente
                                                         </button>
@@ -416,7 +418,7 @@
                                                         <button ng-disabled="clientFormEditar.$invalid"
                                                                 data-dismiss="modal"
                                                                 class="btn btn-success btn-block form-control cadastro"
-                                                                ng-click="editarClient(client,numberPage)"
+                                                                ng-click="editarClient(client,numberPage,page)"
                                                         >Salvar alterações
                                                         </button>
                                                     </div>
@@ -447,7 +449,7 @@
                                     <div class="row">
                                         <div class="col-md-3 col-md-offset-3">
                                             <button class="btn btn-success btn-block" data-dismiss="modal"
-                                                    ng-click="excluirClient(client,numberPage)">
+                                                    ng-click="excluirClient(client,numberPage,page)">
                                                 Confirmar
                                             </button>
                                         </div>
