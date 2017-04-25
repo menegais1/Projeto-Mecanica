@@ -27,6 +27,9 @@
     <script src="lib/angular.js"></script>
     <script src="lib/angular-messages.min.js"></script>
     <script src="js/mecanica.js"></script>
+    <script src="js/services/configValue.js"></script>
+    <script src="js/services/clientAPIService.js"></script>
+    <script src="js/services/miscService.js"></script>
     <script src="js/controllers/clientController.js"></script>
 </head>
 
@@ -230,7 +233,8 @@
                         </div>
                         <div class="col-md-3">
                             <form>
-                                <select ng-change="numberPerPage(numberPage,page)" ng-model="numberPage" name="numberPage"
+                                <select ng-change="numberPerPage(numberPage,page)" ng-model="numberPage"
+                                        name="numberPage"
                                         id="numberPage"
                                         class="form-control input-lg">
                                     <option value="">Number Per Page (5)</option>
@@ -244,13 +248,14 @@
                         <div class="col-md-6 col-md-offset-2 text-center">
                             <div class="paginator">
                                 <a class="btn btn-sm btn-default pgn-btn-previous">Anterior</a>
-                                <a ng-click="numberPerPage(numberPage,page)" href="#" ng-repeat="page in pages" class="pgn-link">
+                                <a ng-click="numberPerPage(numberPage,page)" href="#" ng-repeat="page in pages"
+                                   class="pgn-link">
                                     {{page + 1}}
                                 </a>
-                               <!-- <a class="pgn-link">2</a>
-                                <a class="pgn-link">3</a>
-                                <a class="pgn-link">4</a>
-                                <a class="pgn-link">5</a>-->
+                                <!-- <a class="pgn-link">2</a>
+                                 <a class="pgn-link">3</a>
+                                 <a class="pgn-link">4</a>
+                                 <a class="pgn-link">5</a>-->
                                 <a class="btn btn-sm btn-default pgn-btn-next">Próximo</a>
                             </div>
                         </div>
@@ -291,13 +296,15 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <label class="control-label" for="cpf_novo">Cpf</label>
-                                                        <input ng-class="{error: checarCampo(clientFormNovo.cpf,'required','pattern')}"
+                                                        <input ng-model="client.cpf"
+                                                               ng-class="{error: checarCampo(clientFormNovo.cpf,'required','pattern')}"
                                                                ng-required="true"
-                                                               ng-pattern="/^\d{3}.\d{3}.\d{3}-\d{2}$/" type="text"
+                                                               type="text"
                                                                class="form-control" name="cpf"
-                                                               ng-model="client.cpf"
                                                                id="cpf_novo"
-                                                               placeholder="Insira o CPF">
+                                                               placeholder="Insira o CPF"
+                                                               ng-pattern="/^\d{3}.\d{3}.\d{3}-\d{2}$/">
+
                                                         <div ng-messages="clientFormNovo.cpf.$error"
                                                              ng-if="clientFormNovo.cpf.$touched || clientFormNovo.cpf.$dirty">
                                                             <div ng-message="required" class="text-center error">

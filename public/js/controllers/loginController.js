@@ -3,12 +3,12 @@
  */
 
 
-angular.module('mecanica').controller('loginController', function ($scope, $http) {
+angular.module('mecanica').controller('loginController', function ($scope, $http, loginAPIService, miscService) {
 
     $scope.usuario = {};
 
     $scope.login = function (usuario, form) {
-        $http.post("http://127.0.0.1:8000/api/login", usuario).then(function (data) {
+        loginAPIService.login(usuario).then(function (data) {
             console.log(data.data);
             sessionStorage.setItem('token', data.data.token);
             console.log(sessionStorage.getItem('token'));
@@ -17,9 +17,10 @@ angular.module('mecanica').controller('loginController', function ($scope, $http
         $scope.limparFormulario(form);
     };
 
-    $scope.salvarUsuario = function (usuario,form) {
+    $scope.salvarUsuario = function (usuario, form) {
         delete usuario.passwordConfirmation;
-        $http.post("http://127.0.0.1:8000/api/register", usuario).then(function (data) {
+        usuario.status = false;
+        loginAPIService.saveUser(usuario).then(function (data) {
             console.log(data.data);
         });
         $scope.limparFormulario(form);
@@ -27,31 +28,14 @@ angular.module('mecanica').controller('loginController', function ($scope, $http
 
 
     $scope.limparFormulario = function (form) {
+        delete $scope.client;
         form.$setPristine();
         form.$setUntouched();
-        delete $scope.usuario;
     };
 
-    $scope.checarCampo = function (campo) {
+    $scope.checarCampo = $scope.checarCampo = function (campo) {
         var arguments = Array.from(arguments);
-
-        if (arguments.indexOf('required') > -1) {
-            if ((campo.$dirty || campo.$touched) && campo.$error.required) {
-                return true;
-            }
-        }
-        if (arguments.indexOf('pattern') > -1) {
-            if (campo.$error.pattern) {
-                return true;
-            }
-        }
-        if (arguments.indexOf('minlength') > -1 || arguments.indexOf('maxlength')) {
-            if (campo.$error.minlength || campo.$error.maxlength) {
-                return true;
-            }
-        }
-
-        return false;
-    };
+        return miscService.checarCampo(campo, arguments);
+    }
 
 });

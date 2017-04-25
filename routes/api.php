@@ -33,7 +33,7 @@ Route::post('login', 'Auth\LoginController@login');
 Route::post('register', 'UserController@store');
 Route::get('findUsers', 'UserController@name');
 
-Route::group(['middleware' => 'jwt.auth'], function () {
+Route::group([/*'middleware' => 'jwt.auth'*/], function () {
     Route::get('client/{offset}/{limit}', 'ClientController@index');
     Route::resource("client", "ClientController");
 
