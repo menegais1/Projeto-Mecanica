@@ -2,6 +2,7 @@
 
 namespace mecanica\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use mecanica\Vehicle;
 

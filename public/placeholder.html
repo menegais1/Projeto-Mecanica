@@ -25,15 +25,121 @@
     <script src="lib/bootstrap.min.js"></script>
 
     <script src="lib/angular.js"></script>
+    <script src="lib/angular-messages.min.js"></script>
     <script src="js/mecanica.js"></script>
     <script src="js/controllers/clientController.js"></script>
 </head>
 
-<body class="hold-transition skin-red sidebar-mini" ng-controller="mecanicaController">
+<body class="hold-transition skin-red sidebar-mini" ng-controller="clientController">
 <div class="wrapper">
 
-    <header class="main-header" ng-include="'views/includes/header.html'"></header>
-    <aside class="main-sidebar" ng-include="'views/includes/sidebar.html'"></aside>
+    <header class="main-header"><!-- Main Header -->
+        <!--<header class="main-header">-->
+
+        <!-- Logo -->
+        <a href="#" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>P</b>JM</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Projeto</b> Mecanica</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+
+
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="hidden-xs">Alexander Pierce</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                <br>
+                                <br>
+
+                                <h4>
+                                    Alexander Pierce
+                                </h4>
+                                <h4><span>Status: </span><a href="#"><i class="fa fa-circle text-success"></i>
+                                    Online</a></h4>
+
+
+                            </li>
+
+
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+
+                                <div class="text-center">
+                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Control Sidebar Toggle Button -->
+
+                </ul>
+            </div>
+        </nav>
+        <!--</header>-->
+    </header>
+    <aside class="main-sidebar">
+        <!-- Left side column. contains the logo and sidebar -->
+
+        <!--
+        <aside class="main-sidebar">
+        -->
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+
+                <div class="info">
+                    <br>
+                    <p class="highlight-text">Alexander Pierce</p>
+                    <h5><a href="#"><i class="fa fa-circle text-success"></i> Online</a></h5>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu">
+                <li class="header"><h4>Tabelas</h4></li>
+                <!-- Optionally, you can add icons to the links -->
+                <li class="active"><a href="#"><i class="fa fa-link"></i> <span>Cliente</span></a></li>
+                <li><a href="#"><i class="fa fa-link"></i> <span>Veiculo</span></a></li>
+                <li><a href="#"><i class="fa fa-link"></i> <span>Ordem de Serviço</span></a></li>
+                <li><a href="#"><i class="fa fa-link"></i> <span>Contatos</span></a></li>
+
+                <!-- <li class="treeview">
+                     <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
+                         <span class="pull-right-container">
+               <i class="fa fa-angle-left pull-right"></i>
+             </span>
+                     </a>
+                     <ul class="treeview-menu">
+                         <li><a href="#">Link in level 2</a></li>
+                         <li><a href="#">Link in level 2</a></li>
+                     </ul>
+                 </li>-->
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+
+        <!--
+        </aside>-->
+    </aside>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
 
@@ -55,15 +161,15 @@
 
                 <div class="row data">
                     <div class="row">
-
                         <div class="col-md-6">
-
-                            <button data-toggle="modal" data-target="#modalNovo" class="btn btn-success btn-block btn-novo">Novo Contato
+                            <button data-toggle="modal" data-target="#modalNovo"
+                                    ng-click="abrirClient(clientFormNovo)" class="btn btn-success btn-block btn-novo">
+                                Novo Cliente
                             </button>
-
                         </div>
                         <div class="col-md-6 ">
-                            <input class="form-control input-lg" id="search" type="text" placeholder="Procurar..."
+                            <input class="form-control input-lg" ng-model='search' id="search" type="text"
+                                   placeholder="Procurar..."
                                    name="search">
 
                         </div>
@@ -74,52 +180,46 @@
                             <thead>
                             <tr>
                                 <th>
-                                    Id
+                                    <a href="#" ng-click="ordernarPor('id')">Id</a>
                                 </th>
                                 <th>
-                                    Cliente
+                                    <a href="#" ng-click="ordernarPor('name')">Nome</a>
                                 </th>
                                 <th>
-                                    Nome
+                                    <a href="#" ng-click="ordernarPor('cpf')">Cpf</a>
                                 </th>
                                 <th>
-                                    Email
+                                    <a href="#" ng-click="ordernarPor('status')">Status</a>
                                 </th>
-                                <th>
-                                    Telefone
-                                </th>
+
                                 <th>
                                     Funções
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>
-                                    12
+                            <tr ng-repeat="client in clients | limitTo: numberPage || 5 | filter:search | orderBy:ordenacao:ordem">
+                                <td ng-bind="client.id">
                                 </td>
-                                <td>
-                                    Roberto Menegais
+                                <td ng-bind="client.name">
                                 </td>
-                                <td>
-                                    ypk-8228
+                                <td ng-bind="client.cpf">
                                 </td>
-                                <td>
-                                    Ford
-                                </td>
-                                <td>
-                                    2007
-                                </td>
+                                <td ng-bind="client.status">
 
+                                </td>
                                 <td>
-                                    <button data-toggle="modal" data-target="#modalEditar" class="btn btn-sm btn-primary">Editar
+                                    <button data-toggle="modal" ng-click="carregarDados(client)"
+                                            data-target="#modalEditar"
+                                            class="btn btn-sm btn-primary">Editar
                                     </button>
-                                    <button data-toggle="modal" data-target="#modalExcluir" class="btn btn-sm btn-warning">Excluir
+                                    <button data-toggle="modal" data-target="#modalExcluir"
+                                            ng-click="carregarDados(client)"
+                                            class="btn btn-sm btn-warning">Excluir
                                     </button>
                                 </td>
 
                             </tr>
-
                             </tbody>
                         </table>
                     </div>
@@ -129,21 +229,28 @@
                             <label class="control-label" for="numberPage">Number Per Page</label>
                         </div>
                         <div class="col-md-3">
-                            <select name="numberPage" id="numberPage" class="form-control input-lg">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="15">15</option>
-                                <option value="20">20</option>
-                            </select>
+                            <form>
+                                <select ng-change="numberPerPage(numberPage,page)" ng-model="numberPage" name="numberPage"
+                                        id="numberPage"
+                                        class="form-control input-lg">
+                                    <option value="">Number Per Page (5)</option>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </form>
                         </div>
                         <div class="col-md-6 col-md-offset-2 text-center">
                             <div class="paginator">
                                 <a class="btn btn-sm btn-default pgn-btn-previous">Anterior</a>
-                                <a class="pgn-link">1</a>
-                                <a class="pgn-link">2</a>
-                                <a class="pgn-link">3</a>
-                                <a class="pgn-link">4</a>
-                                <a class="pgn-link">5</a>
+                                <a ng-click="numberPerPage(numberPage,page)" href="#" ng-repeat="page in pages" class="pgn-link">
+                                    {{page + 1}}
+                                </a>
+                                <!-- <a class="pgn-link">2</a>
+                                 <a class="pgn-link">3</a>
+                                 <a class="pgn-link">4</a>
+                                 <a class="pgn-link">5</a>-->
                                 <a class="btn btn-sm btn-default pgn-btn-next">Próximo</a>
                             </div>
                         </div>
@@ -155,45 +262,74 @@
                             <!-- Modal content-->
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Cadastrar novo Contato</h4>
+                                    <button type="button" class="close"
+                                            data-dismiss="modal">&times;
+                                    </button>
+                                    <h4 class="modal-title">Cadastrar novo Cliente</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="cadastro-form">
-                                            <form class="form-group">
+                                            <form class="form-group" name="clientFormNovo">
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="client_id_novo">Cliente</label>
-                                                        <select class="form-control" name="client_id_novo" id="client_id_novo">
-                                                            <option value="0">Placeholder</option>
-                                                        </select>
-                                                    </div>
+
                                                     <div class="col-md-6">
                                                         <label class="control-label" for="name_novo">Nome</label>
-                                                        <input type="text" class="form-control" name="name_novo" id="name_novo"
+                                                        <input ng-class="{error: checarCampo(clientFormNovo.name,'required')}"
+                                                               ng-required="true" type="text" class="form-control"
+                                                               name="name"
+                                                               ng-model="client.name"
+                                                               id="name_novo"
                                                                placeholder="Insira o Nome">
+
+                                                        <div ng-messages="clientFormNovo.name.$error"
+                                                             ng-if="clientFormNovo.name.$touched || clientFormNovo.name.$dirty">
+                                                            <div ng-message="required" class="text-center error">
+                                                                Campo Obrigatório
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label class="control-label" for="cpf_novo">Cpf</label>
+                                                        <input ng-class="{error: checarCampo(clientFormNovo.cpf,'required','pattern')}"
+                                                               ng-required="true"
+                                                               ng-pattern="/^\d{3}.\d{3}.\d{3}-\d{2}$/" type="text"
+                                                               class="form-control" name="cpf"
+                                                               ng-model="client.cpf"
+                                                               id="cpf_novo"
+                                                               placeholder="Insira o CPF">
+                                                        <div ng-messages="clientFormNovo.cpf.$error"
+                                                             ng-if="clientFormNovo.cpf.$touched || clientFormNovo.cpf.$dirty">
+                                                            <div ng-message="required" class="text-center error">
+                                                                Campo Obrigatório
+                                                            </div>
+                                                            <div ng-message="pattern" class="text-center error">
+                                                                Formato: 999.999.999-99
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label class="control-label" for="email_novo">Email</label>
-                                                        <input type="text" class="form-control" name="email_novo"
-                                                               id="email_novo"
-                                                               placeholder="Insira o Email">
+                                                        <br>
+                                                        <div class="checkbox">
+                                                            <label class="control-label" for="status_novo"><input
+                                                                    name="status" id="status_novo"
+                                                                    ng-model="client.status"
+                                                                    type="checkbox" value="">Status</label>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="phone_novo">Telefone</label>
-                                                        <input type="text" class="form-control" name="phone_novo"
-                                                               id="phone_novo"
-                                                               placeholder="Insira o Telefone">
-                                                    </div>
+
+
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6 col-md-offset-3">
-                                                        <input type="submit"
-                                                               class="btn btn-success btn-block form-control cadastro"
-                                                               value="Criar Novo Contato">
+                                                        <button data-dismiss="modal"
+                                                                ng-disabled="clientFormNovo.$invalid"
+                                                                ng-click="salvarClient(client,numberPage,page)"
+                                                                class="btn btn-primary btn-block form-control cadastro">
+                                                            Criar Novo Cliente
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -201,7 +337,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Fechar
+                                    <button type="button" class="btn btn-default"
+                                            data-dismiss="modal">Fechar
                                     </button>
                                 </div>
                             </div>
@@ -216,51 +353,74 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Editar Contato</h4>
+                                    <h4 class="modal-title">Editar Cliente</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="cadastro-form">
-                                            <form class="form-group">
+                                            <form class="form-group" name="clientFormEditar">
 
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <label class="control-label" for="id_editar">Id</label>
-                                                        <input type="text" class="form-control" name="id_editar" id="id_editar">
+                                                        <input ng-required="true" ng-disabled="true" type="text"
+                                                               ng-model="client.id" class="form-control"
+                                                               name="id"
+                                                               id="id_editar">
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="client_id_editar">Cliente</label>
-                                                        <select class="form-control" name="client_id_editar" id="client_id_editar">
-                                                            <option value="0">Placeholder</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
                                                     <div class="col-md-6">
                                                         <label class="control-label" for="name_editar">Nome</label>
-                                                        <input type="text" class="form-control" name="name_editar" id="name_editar"
+                                                        <input ng-required="true" type="text" class="form-control"
+                                                               name="name"
+                                                               ng-model="client.name"
+                                                               id="name_editar"
                                                                placeholder="Insira o Nome">
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <label class="control-label" for="email_editar">Email</label>
-                                                        <input type="text" class="form-control" name="email_editar"
-                                                               id="email_editar"
-                                                               placeholder="Insira o Email">
+                                                        <div ng-messages="clientFormEditar.name.$error"
+                                                             ng-if="clientFormEditar.name.$touched || clientFormEditar.name.$dirty">
+                                                            <div ng-message="required" class="text-center error">
+                                                                Campo Obrigatório
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-md-6">
-                                                        <label class="control-label" for="phone_editar">Telefone</label>
-                                                        <input type="text" class="form-control" name="phone_editar"
-                                                               id="phone_editar"
-                                                               placeholder="Insira o Telefone">
+                                                        <label class="control-label" for="cpf_editar">Cpf</label>
+                                                        <input ng-pattern="/^\d{3}.\d{3}.\d{3}-\d{2}$/"
+                                                               ng-required="true" type="text" class="form-control"
+                                                               name="cpf"
+                                                               ng-model="client.cpf"
+                                                               id="cpf_editar"
+                                                               placeholder="Insira o Cpf">
+                                                        <div ng-messages="clientFormEditar.cpf.$error"
+                                                             ng-if="clientFormEditar.cpf.$touched || clientFormEditar.cpf.$dirty">
+                                                            <div ng-message="required" class="text-center error">
+                                                                Campo Obrigatório
+                                                            </div>
+                                                            <div ng-message="pattern" class="text-center error">
+                                                                Formato: 999.999.999-99
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <br>
+                                                        <div class="checkbox">
+                                                            <label class="control-label" for="status_editar"><input
+                                                                    name="status" id="status_editar"
+                                                                    ng-model="client.status"
+                                                                    type="checkbox" value="">Status</label>
+                                                        </div>
                                                     </div>
                                                 </div>
+
                                                 <div class="row">
                                                     <div class="col-md-6 col-md-offset-3">
-                                                        <input type="submit"
-                                                               class="btn btn-success btn-block form-control cadastro"
-                                                               value="Salvar alterações">
+                                                        <button ng-disabled="clientFormEditar.$invalid"
+                                                                data-dismiss="modal"
+                                                                class="btn btn-success btn-block form-control cadastro"
+                                                                ng-click="editarClient(client,numberPage,page)"
+                                                        >Salvar alterações
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -283,15 +443,19 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Excluir Contato</h4>
+                                    <h4 class="modal-title">Excluir Cliente</h4>
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-3 col-md-offset-3">
-                                            <button class="btn btn-success btn-block">Confirmar</button>
+                                            <button class="btn btn-success btn-block" data-dismiss="modal"
+                                                    ng-click="excluirClient(client,numberPage,page)">
+                                                Confirmar
+                                            </button>
                                         </div>
                                         <div class="col-md-3">
-                                            <button class="btn btn-danger btn-block" data-dismiss="modal">Cancelar</button>
+                                            <button class="btn btn-danger btn-block" data-dismiss="modal">Cancelar
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -313,7 +477,18 @@
     <!-- /.content-wrapper -->
 
 
-    <footer class="main-footer" ng-include="'views/includes/footer.html'"></footer>
+    <footer class="main-footer">
+        <!-- Main Footer -->
+        <!--<footer class="main-footer">-->
+        <!-- To the right -->
+        <!--  <div class="pull-right hidden-xs">
+              Anything you want
+          </div>-->
+        <!-- Default to the left -->
+        <strong>Copyright &copy; 2016 <a href="#">Developer </a>Roberto Menegais</strong> All rights reserved.
+        <!--
+        </footer>-->
+    </footer>
 
 </div>
 <!-- ./wrapper -->

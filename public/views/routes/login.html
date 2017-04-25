@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="mecanica">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -12,9 +12,15 @@
 
     <link rel="stylesheet" href="../../css/styles.css">
     <script src="../../lib/jquery-3.2.1.min.js"></script>
+    <script src="../../js/AdminLTE.min.js"></script>
     <script src="../../lib/bootstrap.min.js"></script>
+
+    <script src="../../lib/angular.js"></script>
+    <script src="../../lib/angular-messages.min.js"></script>
+    <script src="../../js/mecanica.js"></script>
+    <script src="../../js/controllers/loginController.js"></script>
 </head>
-<body class="login-page">
+<body class="login-page" ng-controller="loginController">
 <div class="overlay"></div>
 <div class="overlay-children">
     <div class="container-fluid">
@@ -30,17 +36,35 @@
                 <div class="login-form center-block bordered">
                     <h2 class="text-center">Faça seu Login</h2>
                     <br>
-                    <form class="form-group">
-                        <label class="control-label" for="login">Nome de Usuário</label>
-                        <input type="text" class="form-control" name="login" id="login"
-                               placeholder="Insira seu Nome de Usuário">
-                        <label class="control-label" for="password">Senha</label>
-                        <input type="text" class="form-control" name="password" id="password"
+                    <form class="form-group" name="loginForm">
+                        <label class="control-label" for="login_login">Nome de Usuário</label>
+                        <input ng-class="{error : checarCampo(loginForm.login,'required')}" ng-model="usuario.login"
+                               type="text" class="form-control" name="login" id="login_login"
+                               placeholder="Insira seu Nome de Usuário" ng-required="true">
+                        <div ng-messages="loginForm.login.$error">
+                            <div ng-if="loginForm.login.$dirty || loginForm.login.$touched" ng-message="required"
+                                 class="error text-center">
+                                Campo Obrigatório
+                            </div>
+                        </div>
+                        <label class="control-label" for="login_password">Senha</label>
+                        <input ng-class="{error : checarCampo(loginForm.password,'required')}"
+                               ng-model="usuario.password" type="text" ng-required="true" class="form-control"
+                               name="password" id="login_password"
                                placeholder="Insira sua senha">
+                        <div ng-messages="loginForm.password.$error">
+                            <div ng-if="loginForm.password.$dirty || loginForm.password.$touched" ng-message="required"
+                                 class="error text-center">
+                                Campo Obrigatório
+                            </div>
+                        </div>
 
-                        <input type="submit" class="btn btn-success btn-block form-control" value="Log in">
+                        <button ng-disabled="loginForm.$invalid" class="btn btn-success btn-block form-control login"
+                                ng-click="login(usuario,loginForm)">Log in
+                        </button>
                     </form>
-                    <button data-toggle="modal" data-target="#myModal" class="btn btn-danger btn-block cadastro">Não tem
+                    <button ng-click="limparFormulario(loginFormNovo)" data-toggle="modal" data-target="#myModal"
+                            class="btn btn-danger btn-block cadastro">Não tem
                         Conta? Cadastre-se
                     </button>
                 </div>
@@ -58,39 +82,87 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="cadastro-form">
-                                        <form class="form-group">
+                                        <form class="form-group" name="loginFormNovo">
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <label class="control-label" for="name">Nome</label>
-                                                    <input type="text" class="form-control" name="name" id="name"
+                                                    <label class="control-label" for="novo_name">Nome</label>
+
+                                                    <input ng-class="{error : checarCampo(loginFormNovo.name,'required')}"
+                                                           ng-required="true" ng-model="usuario.name" type="text"
+                                                           class="form-control" name="name" id="novo_name"
                                                            placeholder="Insira seu Nome">
+                                                    <div ng-messages="loginFormNovo.name.$error">
+                                                        <div ng-if="loginFormNovo.name.$dirty || loginFormNovo.name.$touched"
+                                                             ng-message="required" class="error text-center">
+                                                            Campo Obrigatório
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <label class="control-label" for="login">Login</label>
-                                                    <input type="text" class="form-control" name="login" id="login"
+                                                    <label class="control-label" for="novo_login">Login</label>
+                                                    <input ng-class="{error : checarCampo(loginFormNovo.login,'required')}"
+                                                           ng-required="true" ng-model="usuario.login" type="text"
+                                                           class="form-control" name="login" id="novo_login"
                                                            placeholder="Insira seu Login">
+                                                    <div ng-messages="loginFormNovo.login.$error">
+                                                        <div ng-if="loginFormNovo.login.$dirty || loginFormNovo.login.$touched"
+                                                             ng-message="required" class="error text-center">
+                                                            Campo Obrigatório
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6">
-                                                    <label class="control-label" for="password">Senha</label>
-                                                    <input type="text" class="form-control" name="password"
-                                                           id="password"
+                                                    <label class="control-label" for="novo_password">Senha</label>
+                                                    <input ng-class="{error : checarCampo(loginFormNovo.password,'required')}"
+                                                           ng-required="true" ng-model="usuario.password" type="text"
+                                                           class="form-control" name="password"
+                                                           id="novo_password"
                                                            placeholder="Insira sua senha">
+                                                    <div ng-messages="loginFormNovo.password.$error">
+                                                        <div ng-if="loginFormNovo.password.$dirty || loginFormNovo.password.$touched"
+                                                             ng-message="required" class="error text-center">
+                                                            Campo Obrigatório
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-6">
-                                                    <label class="control-label" for="passwordConfirmation">Confirmação
+                                                    <label class="control-label" for="novo_passwordConfirmation">Confirmação
                                                         da Senha</label>
-                                                    <input type="text" class="form-control" name="passwordConfirmation"
-                                                           id="passwordConfirmation"
+                                                    <input ng-class="{error : checarCampo(loginFormNovo.passwordConfirmation,'required')}"
+                                                           ng-required="true" ng-model="usuario.passwordConfirmation"
+                                                           type="text" class="form-control" name="passwordConfirmation"
+                                                           id="novo_passwordConfirmation"
                                                            placeholder="Confirme sua senha">
+                                                    <div ng-messages="loginFormNovo.passwordConfirmation.$error">
+                                                        <div ng-if="loginFormNovo.passwordConfirmation.$dirty || loginFormNovo.passwordConfirmation.$touched"
+                                                             ng-message="required" class="error text-center">
+                                                            Campo Obrigatório
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <br>
+                                                    <div class="checkbox">
+                                                        <label class="control-label" for="novo_status"><input
+                                                                name="status" id="novo_status"
+                                                                ng-model="usuario.status"
+                                                                type="checkbox" value="">Status</label>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-6 col-md-offset-3">
-                                                    <input type="submit"
-                                                           class="btn btn-success btn-block form-control cadastro"
-                                                           value="Cadastrar">
+                                                    <button ng-disabled="loginFormNovo.$invalid"
+                                                            ng-click="salvarUsuario(usuario,loginFormNovo)"
+                                                            type="submit"
+                                                            class="btn btn-success btn-block form-control cadastro"
+                                                    >Cadastrar
+                                                    </button>
                                                 </div>
                                             </div>
                                         </form>

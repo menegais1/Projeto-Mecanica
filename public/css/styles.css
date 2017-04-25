@@ -142,6 +142,11 @@ button.cadastro {
     margin-left: 5px;
 }
 
+button.login {
+    margin-top: 10px;
+    margin-left: 5px;
+}
+
 input.cadastro {
     margin-top: 10px;
 }
@@ -162,13 +167,14 @@ input.cadastro {
 }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-    background-color:#d2d2d2;
+    background-color: #d2d2d2;
 }
 
-div.error{
+div.error {
     color: red;
 }
-input.error{
+
+input.error {
     border-color: red;
 }
 

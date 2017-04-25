@@ -2,11 +2,18 @@
 
 namespace mecanica\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use mecanica\User;
 
 class UserController extends Controller
 {
+
+    public function name(){
+        return Response::create(User::query()->pluck('login')->toArray(),200);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +21,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all();
+        return Response::create(User::all(), 200);
     }
 
     /**
@@ -37,12 +44,13 @@ class UserController extends Controller
     {
         try {
             $user = new User();
+            $request['password'] = bcrypt($request->input('password'));
             $user->fill($request->toArray());
             $user->save();
         } catch (QueryException $e) {
-            return [];
+            return Response::create(['error' => 'Could not save data'],500);
         }
-        return $user->toArray();
+        return Response::create($user->toArray(),200);
     }
 
     /**
@@ -64,7 +72,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return User::find($id);
+        return Response::create(User::find($id),200);
     }
 
     /**
@@ -78,12 +86,13 @@ class UserController extends Controller
     {
         try {
             $user = User::find($id);
+            $request['password'] = bcrypt($request->input('password'));
             $user->fill($request->toArray());
             $user->save();
         } catch (QueryException $e) {
-            return [];
+            return Response::create(['error' => 'Could not update data'],500);
         }
-        return $user->toArray();
+        return Response::create($user->toArray(),200);
     }
 
     /**
@@ -94,6 +103,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        return (String)(User::find($id)->delete());
+        return Response::create(User::find($id)->delete(),200);
     }
 }

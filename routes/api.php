@@ -27,12 +27,25 @@ use Illuminate\Http\Request;
 header('Access-Control-Allow-Origin:  *');
 header('Access-Control-Allow-Methods:  GET,PUT,POST,DELETE,OPTIONS');
 header('Access-Control-Allow-Headers:  Content-Type');
+header('Accept: Application/json');
 
-Route::get('client/{offset}/{limit}','ClientController@index');
-Route::resource("client","ClientController");
-Route::resource("contact","ContactController");
-Route::resource("vehicle","VehicleController");
-Route::resource("service_order","ServiceOrderController");
-Route::resource("user","UserController");
+Route::post('login', 'Auth\LoginController@login');
+Route::post('register', 'UserController@store');
+Route::get('findUsers', 'UserController@name');
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('client/{offset}/{limit}', 'ClientController@index');
+    Route::resource("client", "ClientController");
+
+    Route::resource("contact", "ContactController");
+
+    Route::resource("vehicle", "VehicleController");
+
+    Route::resource("service_order", "ServiceOrderController");
+    Route::resource("user", "UserController");
+
+});
+
+
 
 
